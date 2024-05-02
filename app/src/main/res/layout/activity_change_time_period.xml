@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChangeTimePeriod"
+    android:orientation="vertical">
+<TextView
+    android:id="@+id/periodTV"
+    android:text="Change Time Period"
+    android:textSize="36dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/earlyDateET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:hint="Enter the start date"/>
+    <EditText
+        android:id="@+id/lateDateET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:hint="Enter the end date"/>
+    <Button
+        android:id="@+id/setBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Period"
+        />
+
+
+</LinearLayout>
