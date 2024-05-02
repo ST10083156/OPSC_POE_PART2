@@ -6,28 +6,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SetGoals"
-    android:orientation="vertical">
-<TextView
-    android:id="@+id/setGoalsTV"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Set Goals"
-    android:textSize="36dp"/>
-    <EditText
-        android:id="@+id/minET"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/profile">
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Minimum Goal"
-        android:inputType="number"/>
-    <EditText
-        android:id="@+id/maxET"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Maximum Goal"
-        android:inputType="number"/>
-    <Button
-        android:id="@+id/setBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Set Goals"/>
+        android:layout_margin="30dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/custom_edittext"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/setGoalsTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Set Goals"
+                android:textAlignment="center"
+                android:textColor="@color/purple_500"
+                android:textSize="36sp"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/minET"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Minimum Goal"
+                android:inputType="number"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/custom_edittext"
+                android:padding="15dp"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/maxET"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Maximum Goal"
+                android:inputType="number"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/custom_edittext"
+                android:padding="15dp"
+                android:textColor="@color/black"/>
+
+            <Button
+                android:id="@+id/setBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:text="Set Goals"
+                android:textSize="18sp"
+                app:cornerRadius="20dp"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/teal_700"
+                android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>
