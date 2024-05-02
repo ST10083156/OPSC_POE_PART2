@@ -19,43 +19,45 @@ class CategoriesPage : AppCompatActivity() {
     private lateinit var binding : ActivityCategoriesPageBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MyAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-       binding = ActivityCategoriesPageBinding.inflate(layoutInflater)
+        binding = ActivityCategoriesPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        var categoriesList = mutableListOf<Category>()
+
+        val categoriesList = mutableListOf<Category>()
         adapter = MyAdapter(categoriesList)
-        recyclerView=binding.categoriesRV
+        recyclerView = binding.categoriesRV
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        binding.addBtn.setOnClickListener{
-            if(binding.categoryET.text!=null){
-                var category = Category(binding.categoryET.text.toString())
+        binding.addBtn.setOnClickListener {
+            val categoryName = binding.categoryET.text.toString().trim()
+            if (categoryName.isNotEmpty()) {
+                val category = Category(categoryName)
                 categoriesList.add(category)
                 adapter.notifyDataSetChanged()
                 binding.categoryET.text.clear()
+            } else {
+                Toast.makeText(this, "Please fill in the category name", Toast.LENGTH_LONG).show()
+            }
+        }
 
-            }
-            else {
-            Toast.makeText(this,"Please fill in the category name",Toast.LENGTH_LONG)
-            }
-            }
-        binding.doneBtn.setOnClickListener{
- var doneCategoriesList = CategoriesList.init(categoriesList)
-var intent = Intent(this,NewTimesheetEntry::class.java)
+        binding.doneBtn.setOnClickListener {
+            // Start the new timesheet entry activity
+            val intent = Intent(this, NewTimesheetEntry::class.java)
             startActivity(intent)
             finish()
         }
+    }
+}
 
-    }
-    }
 class MyAdapter(private val dataList: MutableList<Category>) :
     RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
@@ -76,4 +78,3 @@ class MyAdapter(private val dataList: MutableList<Category>) :
         return dataList.size
     }
 }
-

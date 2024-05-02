@@ -11,15 +11,24 @@ class CategoriesList private constructor(categories: MutableList<Category>) {
         fun addCategory(category: Category) {
             categoriesList.add(category)
         }
-        fun getCategory(index:Int) :Category
-        {
+
+        fun getCategory(index: Int): Category {
             return categoriesList[index]
         }
-        fun init(categories: MutableList<Category>) {
+
+        fun init(categories: MutableList<Category>, timesheetEntries: List<TimesheetEntry>) {
             categoriesList.addAll(categories)
+
+            // Calculate total time for each category
+            for (category in categoriesList) {
+                var totalTime = 0L
+                for (entry in timesheetEntries) {
+                    if (entry.Category == category) {
+                        totalTime += entry.TimeSpent.inWholeSeconds
+                    }
+                }
+                category.totalTimeSeconds = totalTime
+            }
         }
     }
-
-
 }
-

@@ -26,6 +26,7 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.seconds
 
 class NewTimesheetEntry : AppCompatActivity() {
     private var seconds = 0
@@ -53,94 +54,72 @@ class NewTimesheetEntry : AppCompatActivity() {
             insets
         }
 
+        val timesheetList = mutableListOf<TimesheetEntry>()
 
-        var timesheetList = mutableListOf<TimesheetEntry>()
-
-        val categoryNames = CategoriesList.getCategoriesList().map { it.Name } // Assuming name is the property in Category class containing the category name
+        val categoryNames = CategoriesList.getCategoriesList().map { it.Name }
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categoryNames)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner = binding.categorySpinner
         spinner.adapter = adapter
+
         val buttonAddPicture: Button = binding.buttonAddPicture
         buttonAddPicture.setOnClickListener {
             pictureAdd()
         }
 
         val calendarView = binding.dateCalendar
-        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            val calendar = Calendar.getInstance()
-            calendar.set(year, month, dayOfMonth)
-           selectedDate = calendar.time
+        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            val calendar = Calendar.getInstance().apply {
+                set(year, month, dayOfMonth)
+            }
+            selectedDate = calendar.time
         }
+
         buttonTimer = binding.buttonTimer
         buttonTimer.setOnClickListener {
             if (timerRunning) {
-                // Stop the timer
                 elapsedTime += System.currentTimeMillis() - startTime
                 timerRunning = false
                 buttonTimer.text = "Start Timer"
             } else {
-                // Start the timer
                 startTime = System.currentTimeMillis()
                 timerRunning = true
                 buttonTimer.text = "Stop Timer"
                 runTimer()
-
             }
         }
+
         binding.doneBtn.setOnClickListener {
             if (binding.editTextName.text == null ||
                 binding.categorySpinner.selectedItem == null ||
-                binding.editTextDescription.text == null||
-               selectedDate==null ||
+                binding.editTextDescription.text == null ||
+                selectedDate == null ||
                 binding.imageView.drawable == R.drawable.ic_launcher_foreground.toDrawable()
             ) {
-                Toast.makeText(this, "Please fill all the relevant fields", Toast.LENGTH_LONG)
-            }
-            else{
-                if (binding.editTextName.text != null &&
-                    binding.categorySpinner.selectedItem != null &&
-                    binding.editTextDescription.text != null &&
-                    selectedDate!=null &&
-                    binding.imageView.drawable == R.drawable.ic_launcher_foreground.toDrawable()
-                ) {
-                    timesheetEntry = TimesheetEntry(
-                        Name = binding.editTextName.text.toString(),
-                        Category = CategoriesList.getCategory(binding.categorySpinner.selectedItemPosition),
-                        Date = selectedDate,
-                        Description = binding.editTextDescription.text.toString(),
-                        TimeSpent = elapsedTime.milliseconds,
-                        Image = null
-                    )
-                    timesheetList.add(timesheetEntry)
-                    TimesheetEntriesList.init(timesheetList)
+                Toast.makeText(this, "Please fill all the relevant fields", Toast.LENGTH_LONG).show()
+            } else {
+                val totalTimePerCategory = mutableMapOf<String, Long>()
 
-                    val intent = Intent(this, TimesheetEntriesListDisplay::class.java)
-                    startActivity(intent)
-                    finish()
+                for (entry in timesheetList) {
+                    val categoryName = entry.Category.Name
+                    val totalTime = totalTimePerCategory.getOrDefault(categoryName, 0L)
+                    val timeSpentInSeconds = entry.TimeSpent.inWholeSeconds
+                    totalTimePerCategory[categoryName] = totalTime + timeSpentInSeconds
                 }
 
-                else{
-                    timesheetEntry = TimesheetEntry(
-                        Name = binding.editTextName.text.toString(),
-                        Category =CategoriesList.getCategory(binding.categorySpinner.selectedItemPosition),
-                        Date = selectedDate,
-                        Description = binding.editTextDescription.text.toString(),
-                        TimeSpent = elapsedTime.milliseconds,
-                        Image = getImageUri(binding.imageView)
-                    )
-
-                    timesheetList.add(timesheetEntry)
-                    TimesheetEntriesList.init(timesheetList)
-                    val intent = Intent(this, TimesheetEntriesListDisplay::class.java)
-                    startActivity(intent)
-                    finish()
+                val intent = Intent(this, TimesheetEntriesListDisplay::class.java).apply {
+                    totalTimePerCategory.forEach { (category, total) ->
+                        putExtra(category, total)
+                    }
                 }
-
+                startActivity(intent)
+                finish()
             }
         }
     }
+
+
     fun convertTextToDate(inputText: String): Date {
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         return dateFormat.parse(inputText) ?: Date()
