@@ -32,14 +32,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Min: "/>
+                android:text="Min: Not set"/>
 
             <TextView
                 android:id="@+id/textViewDailyGoalMax"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Max: "/>
+                android:text="Max: Not set"/>
 
         </LinearLayout>
 

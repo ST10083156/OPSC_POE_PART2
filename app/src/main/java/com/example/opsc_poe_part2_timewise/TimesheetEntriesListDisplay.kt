@@ -24,7 +24,8 @@ import java.util.Locale
 
 class TimesheetEntriesListDisplay : AppCompatActivity() {
     private lateinit var binding: ActivityTimesheetEntriesListDisplayBinding
-
+private  var minDailyGoal:Number = 0
+private  var maxDailyGoal:Number = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -35,6 +36,20 @@ class TimesheetEntriesListDisplay : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        minDailyGoal = intent.getIntExtra("minGoal",0)
+        maxDailyGoal = intent.getIntExtra("maxGoal",0)
+        if(minDailyGoal as Int >0 && maxDailyGoal as Int>0)
+        {
+            binding.textViewDailyGoalMin.text = "Minimum Goal: ${minDailyGoal} hours"
+            binding.textViewDailyGoalMax.text = "Maximum Goal: ${maxDailyGoal} hours"
+        }
+        else{
+            binding.textViewDailyGoalMin.text = "Minimum Goal: Not Set"
+            binding.textViewDailyGoalMax.text = "Maximum Goal: Not Set"
+        }
+
+
         val layoutManager = LinearLayoutManager(this)
         binding.entriesRecyclerView.layoutManager = layoutManager
         val adapter = MyAdapter(TimesheetEntriesList.getEntriesList(),this, object:MyAdapter.OnItemClickListener{
@@ -57,6 +72,12 @@ binding.newEntryBtn.setOnClickListener{
     startActivity(intent)
     finish()
 }
+
+        binding.buttonSetGoal.setOnClickListener{
+            var intent = Intent(this,SetGoals::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
 
