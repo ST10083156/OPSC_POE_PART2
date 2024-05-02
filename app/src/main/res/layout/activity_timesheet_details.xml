@@ -12,13 +12,19 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/ic_launcher_foreground"/>
-<TextView
-    android:id="@+id/nameTV"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Name"
-    android:textSize="36dp"
-    />
+    <TextView
+        android:id="@+id/titleTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timesheet Entry Details"
+        android:textSize="38dp"
+        /><TextView
+        android:id="@+id/nameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="36dp"
+        />
     <TextView
         android:id="@+id/dateTV"
         android:layout_width="wrap_content"
@@ -38,7 +44,7 @@
         android:id="@+id/timeSpentTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Category"
+        android:text="TimeSpent"
         android:textSize="20dp"
         />
     <TextView
