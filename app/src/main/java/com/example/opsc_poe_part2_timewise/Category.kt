@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Category(
-    var Name: String
+    var Name: String,
+    var totalTimeSeconds: Long = 0
 )
 
