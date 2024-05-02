@@ -32,14 +32,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Min: "/>
+                android:text="Min: Not set"/>
 
             <TextView
                 android:id="@+id/textViewDailyGoalMax"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Max: "/>
+                android:text="Max: Not set"/>
 
         </LinearLayout>
 
@@ -52,11 +52,28 @@
             android:layout_marginTop="8dp"
             android:text="Set Goals" />
     </androidx.cardview.widget.CardView>
-    <Button
-        android:id="@+id/newEntryBtn"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/btnLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Entry"/>
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/newEntryBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Entry"/>
+        <Button
+            android:id="@+id/changePeriodBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change Time Period"/>
+        <Button
+            android:id="@+id/categoriesDisplayBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categories"/>
+    </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/entriesRecyclerView"
