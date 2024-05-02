@@ -164,10 +164,11 @@ class NewTimesheetEntry : AppCompatActivity() {
 
         handler.postDelayed(
             {
-                var hours = seconds/3600
-                var minutes = (seconds%3600)/60
+                var hours = seconds / 3600
+                var minutes = (seconds % 3600) / 60
+                var newSeconds = seconds % 60
 
-                val time = String.format(Locale.getDefault(),"%d:%02d:%02d",hours,minutes,seconds)
+                val time = String.format(Locale.getDefault(),"%d:%02d:%02d",hours,minutes,newSeconds)
                 binding.timerTV.text = time
 
                 if (timerRunning) {

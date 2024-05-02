@@ -9,8 +9,8 @@
     android:orientation="vertical">
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/entryImageView"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:src="@drawable/ic_launcher_foreground"/>
     <TextView
         android:id="@+id/titleTV"
