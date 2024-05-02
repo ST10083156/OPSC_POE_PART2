@@ -33,12 +33,12 @@ class TimesheetDetails : AppCompatActivity() {
         val receivedTimeSpent = intent.getLongExtra("timeSpent",0)
         val receivedImage = intent.getStringExtra("image")
         val finalReceivedDate = Date(receivedDate)
-        var timeInHours = receivedTimeSpent?.toLong()?.div(1000)?.div(60)?.div(60)
+        var timeInMinutes = receivedTimeSpent?.toLong()?.div(1000)?.div(60)
         binding.nameTV.text = receivedName.toString()
         binding.dateTV.text = "Date: ${getDateFromDateObject(finalReceivedDate)}"
         binding.categoryTV.text = "Category: ${receivedCategory.toString()}"
         binding.descriptionTV.text = "Description: ${receivedDescription.toString()}"
-        binding.timeSpentTV.text = "Hours worked on: ${timeInHours.toString()}"
+        binding.timeSpentTV.text = "Minutes worked on: ${timeInMinutes.toString()}"
         binding.entryImageView.setImageURI(Uri.parse(receivedImage))
         if(receivedImage==null){
             binding.entryImageView.setImageDrawable(R.drawable.ic_launcher_foreground.toDrawable())
