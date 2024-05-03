@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/lavender"
                 android:textSize="36sp"
                 android:textStyle="bold"/>
 
@@ -41,10 +41,10 @@
                 android:layout_height="50dp"
                 android:inputType="date"
                 android:hint="Enter the start date"
+                android:padding="8dp"
+                android:textColor="@color/black"
                 android:layout_marginTop="40dp"
-                android:background="@drawable/custom_edittext"
-                android:padding="12dp"
-                android:textColor="@color/black" />
+                android:background="@drawable/custom_edittext"/>
 
             <EditText
                 android:id="@+id/lateDateET"
@@ -52,10 +52,10 @@
                 android:layout_height="50dp"
                 android:inputType="date"
                 android:hint="Enter the end date"
+                android:padding="8dp"
+                android:textColor="@color/black"
                 android:layout_marginTop="40dp"
-                android:background="@drawable/custom_edittext"
-                android:padding="12dp"
-                android:textColor="@color/black"/>
+                android:background="@drawable/custom_edittext"/>
 
             <Button
                 android:id="@+id/setBtn"
@@ -65,9 +65,7 @@
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/teal_200"
                 android:textSize="18sp"
-                app:cornerRadius="20dp"
-                android:layout_gravity="center_horizontal"/>
-
+                app:cornerRadius="20dp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

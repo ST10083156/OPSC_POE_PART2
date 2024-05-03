@@ -13,7 +13,7 @@
         android:theme="@style/Base.Theme.OPSC_POE_PART2_TImeWise"
         tools:targetApi="31">
         <activity
-            android:name=".CategoryTotalHours"
+            android:name=".CategoriesDisplay"
             android:exported="false" />
         <activity
             android:name=".ChangeTimePeriod"

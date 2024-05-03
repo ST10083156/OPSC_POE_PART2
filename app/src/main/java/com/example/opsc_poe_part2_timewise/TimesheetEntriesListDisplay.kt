@@ -144,6 +144,11 @@ class TimesheetEntriesListDisplay : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+        binding.categoriesDisplayBtn.setOnClickListener{
+            var intent = Intent(this,CategoriesDisplay::class.java)
+            startActivity(intent)
+            finish()
+        }
 
     }
 
