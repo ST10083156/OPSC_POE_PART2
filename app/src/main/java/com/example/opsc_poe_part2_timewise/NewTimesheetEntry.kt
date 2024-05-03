@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.CalendarView
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
@@ -25,8 +24,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-import kotlin.time.Duration.Companion.milliseconds
-import kotlin.time.seconds
+
 
 class NewTimesheetEntry : AppCompatActivity() {
     private var seconds = 0
@@ -41,6 +39,10 @@ class NewTimesheetEntry : AppCompatActivity() {
     private val PICK_IMAGE_REQUEST = 1
     private lateinit var spinner :Spinner
     private lateinit var selectedDate : Date
+    private val categorylist = mutableListOf<Int>()
+    private var addedtime =0
+    private var addedpos =0;
+    private var pos =0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +64,10 @@ class NewTimesheetEntry : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner = binding.categorySpinner
         spinner.adapter = adapter
+
+        pos = spinner.getSelectedItemPosition()
+        //spinner.getSelectedItem().toString()
+
 
         val buttonAddPicture: Button = binding.buttonAddPicture
         buttonAddPicture.setOnClickListener {
@@ -159,8 +165,8 @@ class NewTimesheetEntry : AppCompatActivity() {
             binding.imageView.setImageURI(selectedImageUri)
         }
     }
-    private fun runTimer(){
-        val handler = android.os.Handler()
+    private fun runTimer() {
+        var handler = android.os.Handler()
 
         handler.postDelayed(
             {
@@ -168,19 +174,30 @@ class NewTimesheetEntry : AppCompatActivity() {
                 var minutes = (seconds % 3600) / 60
                 var newSeconds = seconds % 60
 
-                val time = String.format(Locale.getDefault(),"%d:%02d:%02d",hours,minutes,newSeconds)
+                var time = String.format(Locale.getDefault(), "%d:%02d:%02d", hours, minutes, newSeconds)
                 binding.timerTV.text = time
 
                 if (timerRunning) {
                     seconds++
-
+                    runTimer() // Call runTimer again for recursive execution after 1 second delay
+                } else {
+                    // Timer stopped, store the final time value
+                    var finalTimeInSeconds = hours * 3600 + minutes * 60 + newSeconds
+                    // Do whatever you want with the final time value
+                    // For example, store it in a variable or display it somewhere
+                    handleFinalTime(finalTimeInSeconds)
                 }
-
-
-                runTimer() // Call runTimer again for recursive execution after 1 second delay
             },
             1000
         )
-
     }
+
+    private var timerValues = mutableListOf<Int>()
+
+    private fun handleFinalTime(finalTimeInSeconds: Int) {
+        var addedpos = timerValues.get(pos)
+        var modifiedFinalTimeInSeconds = finalTimeInSeconds + addedpos
+        timerValues.add(modifiedFinalTimeInSeconds, pos)
+    }
+
 }

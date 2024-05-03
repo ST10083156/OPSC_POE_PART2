@@ -1,5 +1,7 @@
 package com.example.opsc_poe_part2_timewise
 
+import Category
+
 class CategoriesList private constructor(categories: MutableList<Category>) {
     companion object {
         private val categoriesList = mutableListOf<Category>()

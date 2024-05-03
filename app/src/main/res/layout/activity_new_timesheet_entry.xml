@@ -86,6 +86,7 @@
                     android:background="@drawable/custom_edittext"
                     android:layout_marginTop="40dp"
                     android:padding="8dp"
+                    android:entries="@array/category_names"
                     />
 
                 <EditText

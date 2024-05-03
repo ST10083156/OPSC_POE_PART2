@@ -1,5 +1,6 @@
 package com.example.opsc_poe_part2_timewise
 
+import Category
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
