@@ -34,7 +34,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/lavender"
                 android:textSize="36sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
 
             <EditText
@@ -47,7 +47,7 @@
                 android:drawablePadding="8dp"
                 android:hint="Enter your email"
                 android:padding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"/>
 
 
             <EditText
