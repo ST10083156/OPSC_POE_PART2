@@ -6,15 +6,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CategoriesDisplay"
-    android:orientation="vertical">
-<LinearLayout
-    android:id="@+id/categoryContainer"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"></LinearLayout>
+    android:gravity="center"
+    android:background="@drawable/profile">
+
+    <TextView
+        android:id="@+id/categoriesDisplayTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Categories Display"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="20dp">
+
+    <LinearLayout
+        android:id="@+id/categoryContainer"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/returnBtn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Return"/>
+        android:layout_height="60dp"
+        android:text="Return"
+        android:layout_marginTop="130dp"
+        android:backgroundTint="@color/teal_700"
+        android:textSize="18sp"
+        app:cornerRadius="20dp"
+        android:layout_gravity="center_horizontal"/>
+
+    </androidx.cardview.widget.CardView>
+
 </LinearLayout>
